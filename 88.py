@@ -7,35 +7,10 @@ def assertConstraints(nums1, m, nums2, n):
 
 #initialize variables to test
 #sample solution
-def mergeWithSTL(storingList, storageSize, mergingList, listSize):
-    for nextIndex in range(listSize):
-        storingList[storageSize+nextIndex] = mergingList[nextIndex]
-    storingList.sort()
-
-"""
-storingList = nums1
-merginList = nums2
-"""
-#There's a bug!
-# def mergeWithPointers(storeMergeList, firstMergeSize, listToMerge, secondMergeSize):
-#     currResultIndex = firstMergeSize - 1 #not sure how to interpret this?
-#     stillMerging = secondMergeSize - 1
-#     currStoringIndex = firstMergeSize + secondMergeSize - 1 #note sure how to interpret this?
-#     while stillMerging >= 0:
-#         storeMergeListHasGreaterValue = checkIfBigger(storeMergeList, listToMerge, currResultIndex, stillMerging, currStoringIndex)
-#         if storeMergeListHasGreaterValue:
-#             storeMergeList[currStoringIndex] = storeMergeList[currResultIndex]
-#             currResultIndex -= 1
-#         else:
-#             storeMergeList[currStoringIndex] = listToMerge[stillMerging]
-#             stillMerging -= 1
-#         currStoringIndex -= 1
-
-# def checkIfBigger(storeMergeList, listToMerge, currResultIndex, currentIndexToMerge, currStoringIndex):
-#     list1LastIndexIsBigger = storeMergeList[currStoringIndex] > listToMerge[currentIndexToMerge]
-#     storageIsAvailable = currResultIndex >= 0
-#     return list1LastIndexIsBigger and storageIsAvailable
-
+def mergeWithSTL(nums1, firstMergeSize, nums2, secondMergeSize):
+    for nextIndex in range(secondMergeSize):
+        nums1[firstMergeSize+nextIndex] = nums2[nextIndex]
+    nums1.sort()
 
 def merge(nums1, firstMergeSize, nums2, secondMergeSize):
     firstMergeIndex = firstMergeSize - 1
