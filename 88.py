@@ -17,33 +17,51 @@ storingList = nums1
 merginList = nums2
 """
 #There's a bug!
-def mergeWithPointers(storeMergeList, firstMergeSize, listToMerge, secondMergeSize):
-    currResultIndex = firstMergeSize - 1 #not sure how to interpret this?
-    stillMerging = secondMergeSize - 1
-    currStoringIndex = firstMergeSize + secondMergeSize - 1 #note sure how to interpret this?
-    while stillMerging >= 0:
-        storeMergeListHasGreaterValue = checkIfBigger(storeMergeList, listToMerge, currResultIndex, stillMerging, currStoringIndex)
-        if storeMergeListHasGreaterValue:
-            storeMergeList[currStoringIndex] = storeMergeList[currResultIndex]
-            currResultIndex -= 1
-        else:
-            storeMergeList[currStoringIndex] = listToMerge[stillMerging]
-            stillMerging -= 1
-        currStoringIndex -= 1
+# def mergeWithPointers(storeMergeList, firstMergeSize, listToMerge, secondMergeSize):
+#     currResultIndex = firstMergeSize - 1 #not sure how to interpret this?
+#     stillMerging = secondMergeSize - 1
+#     currStoringIndex = firstMergeSize + secondMergeSize - 1 #note sure how to interpret this?
+#     while stillMerging >= 0:
+#         storeMergeListHasGreaterValue = checkIfBigger(storeMergeList, listToMerge, currResultIndex, stillMerging, currStoringIndex)
+#         if storeMergeListHasGreaterValue:
+#             storeMergeList[currStoringIndex] = storeMergeList[currResultIndex]
+#             currResultIndex -= 1
+#         else:
+#             storeMergeList[currStoringIndex] = listToMerge[stillMerging]
+#             stillMerging -= 1
+#         currStoringIndex -= 1
 
-def checkIfBigger(storeMergeList, listToMerge, currResultIndex, currentIndexToMerge, currStoringIndex):
-    list1LastIndexIsBigger = storeMergeList[currStoringIndex] > listToMerge[currentIndexToMerge]
-    storageIsAvailable = currResultIndex >= 0
-    return list1LastIndexIsBigger and storageIsAvailable
+# def checkIfBigger(storeMergeList, listToMerge, currResultIndex, currentIndexToMerge, currStoringIndex):
+#     list1LastIndexIsBigger = storeMergeList[currStoringIndex] > listToMerge[currentIndexToMerge]
+#     storageIsAvailable = currResultIndex >= 0
+#     return list1LastIndexIsBigger and storageIsAvailable
+
+
+def merge(nums1, firstMergeSize, nums2, secondMergeSize):
+    firstMergeIndex = firstMergeSize - 1
+    secondMergeIndex = secondMergeSize - 1
+    storageIndex = firstMergeSize + secondMergeSize - 1
+    #why does secondMergeIndex define still merging? Is it because it tells us
+    #all of the items from the second merge has been added to the storage?
+    while secondMergeIndex >= 0:
+        nums1IsBigger = nums1[firstMergeIndex] > nums2[secondMergeIndex]
+        if firstMergeIndex >= 0 and nums1IsBigger:
+            nums1[storageIndex] = nums1[firstMergeIndex]
+            firstMergeIndex -= 1
+        else:
+            nums1[storageIndex] = nums2[secondMergeIndex]
+            secondMergeIndex -= 1
+        storageIndex -= 1
             
 
 
 ## Testing here
 # print(assertConstraints(nums1, m, nums2, n))
-nums1 = [1,2,3,0,0,0]
-nums2 = [1,2,3]
-m = 3
+nums1 = [0,0,0,0,2,2,7,0,0,0]
+nums2 = [1,4,5]
+m = 7
 n = 3
-mergeWithSTL(nums1, m, nums2, n)
-# mergeWithPointers(nums1, m, nums2, n)
+# mergeWithSTL(nums1, m, nums2, n)
+merge(nums1, m, nums2, n)
+# merge(nums1, m, nums2, n)
 print(nums1)
