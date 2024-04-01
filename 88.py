@@ -16,20 +16,25 @@ def mergeWithSTL(storingList, storageSize, mergingList, listSize):
 storingList = nums1
 merginList = nums2
 """
-def mergeWithPointers(storingList, storageSize, mergingList, listSize):
-    indexUpdateFrom = storageSize - 1
-    currentIndexToMerge = listSize - 1
-    indexUpdateTo = storageSize + listSize - 1
-    while currentIndexToMerge >= 0:
-        nums1FirstIndexIsBigger = storingList[indexUpdateTo] > mergingList[currentIndexToMerge]
-        storageIsAvailable = indexUpdateFrom >= 0
-        if storageIsAvailable and nums1FirstIndexIsBigger:
-            storingList[indexUpdateTo] = storingList[indexUpdateFrom]
-            indexUpdateFrom -= 1
+#There's a bug!
+def mergeWithPointers(storeMergeList, firstMergeSize, listToMerge, secondMergeSize):
+    currResultIndex = firstMergeSize - 1 #not sure how to interpret this?
+    stillMerging = secondMergeSize - 1
+    currStoringIndex = firstMergeSize + secondMergeSize - 1 #note sure how to interpret this?
+    while stillMerging >= 0:
+        storeMergeListHasGreaterValue = checkIfBigger(storeMergeList, listToMerge, currResultIndex, stillMerging, currStoringIndex)
+        if storeMergeListHasGreaterValue:
+            storeMergeList[currStoringIndex] = storeMergeList[currResultIndex]
+            currResultIndex -= 1
         else:
-            storingList[indexUpdateTo] = mergingList[currentIndexToMerge]
-            currentIndexToMerge -= 1
-        indexUpdateTo -= 1
+            storeMergeList[currStoringIndex] = listToMerge[stillMerging]
+            stillMerging -= 1
+        currStoringIndex -= 1
+
+def checkIfBigger(storeMergeList, listToMerge, currResultIndex, currentIndexToMerge, currStoringIndex):
+    list1LastIndexIsBigger = storeMergeList[currStoringIndex] > listToMerge[currentIndexToMerge]
+    storageIsAvailable = currResultIndex >= 0
+    return list1LastIndexIsBigger and storageIsAvailable
             
 
 
@@ -40,4 +45,5 @@ nums2 = [1,2,3]
 m = 3
 n = 3
 mergeWithSTL(nums1, m, nums2, n)
+# mergeWithPointers(nums1, m, nums2, n)
 print(nums1)
