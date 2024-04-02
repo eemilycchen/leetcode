@@ -1,4 +1,10 @@
+"""
+Title: 88. Merge Sorted Array
+Author: Emily Chen
 
+HELP/REFERENCE ACKNOWLEDGEMENT
+Persons: 
+"""
 def assertConstraints(nums1, m, nums2, n):
     assert len(nums1) == m+n, "length of nums1 should be m + n"
     assert len(nums2) == n, "length of nums2 should be n"
