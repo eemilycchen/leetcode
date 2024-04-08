@@ -18,26 +18,24 @@ def assertConstraints(nums1, m, nums2, n):
 
 #initialize variables to test
 #sample solution
-def mergeWithSTL(nums1, firstMergeSize, nums2, secondMergeSize):
-    for nextIndex in range(secondMergeSize):
-        nums1[firstMergeSize+nextIndex] = nums2[nextIndex]
-    nums1.sort()
+def mergeWithSTL(sortedList1, list1Size, sortedList2, list2Size):
+    for nextIndex in range(list2Size):
+        sortedList1[list1Size+nextIndex] = sortedList2[nextIndex]
+    sortedList1.sort()
 
-def merge(nums1, firstMergeSize, nums2, secondMergeSize):
-    firstMergeIndex = firstMergeSize - 1
-    secondMergeIndex = secondMergeSize - 1
-    storageIndex = firstMergeSize + secondMergeSize - 1
-    #why does secondMergeIndex define still merging? Is it because it tells us
-    #all of the items from the second merge has been added to the storage?
-    while secondMergeIndex >= 0:
-        nums1IsBigger = nums1[firstMergeIndex] > nums2[secondMergeIndex]
-        if firstMergeIndex >= 0 and nums1IsBigger:
-            nums1[storageIndex] = nums1[firstMergeIndex]
-            firstMergeIndex -= 1
+def merge(sortedList1, list1Size, sortedList2, list2Size):
+    list1slot = list1Size - 1
+    list2slot = list2Size - 1
+    storageSlot = list1Size + list2Size - 1
+    while list2slot >= 0:
+        list1ElmIsBigger = sortedList1[list1slot] > sortedList2[list2slot]
+        if list1slot >= 0 and list1ElmIsBigger:
+            sortedList1[storageSlot] = sortedList1[list1slot]
+            list1slot -= 1
         else:
-            nums1[storageIndex] = nums2[secondMergeIndex]
-            secondMergeIndex -= 1
-        storageIndex -= 1
+            sortedList1[storageSlot] = sortedList2[list2slot]
+            list2slot -= 1
+        storageSlot -= 1
             
 
 
